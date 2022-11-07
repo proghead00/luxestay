@@ -1,7 +1,6 @@
 import Hotel from "../models/Hotel.js";
 
 export const createHotel = async (req, res, next) => {
-  // create hotel
   const newHotel = new Hotel(req.body);
   try {
     const savedHotel = await newHotel.save();
@@ -12,7 +11,6 @@ export const createHotel = async (req, res, next) => {
 };
 
 export const deleteHotel = async (req, res, next) => {
-  // update hotel
   const newHotel = new Hotel(req.body);
   try {
     await Hotel.findByIdAndDelete(req.params.id);
@@ -23,7 +21,6 @@ export const deleteHotel = async (req, res, next) => {
 };
 
 export const updateHotel = async (req, res, next) => {
-  // update hotel
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(req.params.id, {
       $set: req.body,
@@ -36,21 +33,19 @@ export const updateHotel = async (req, res, next) => {
 };
 
 export const getHotel = async (req, res, next) => {
-  // get hotel
   try {
-    const hotels = await Hotel.find();
-    res.status(200).json(hotels);
+    const hotel = await Hotel.findById(req.params.id);
+    res.status(200).json(hotel);
   } catch (err) {
     next(err);
   }
 };
 
+// get all hotels list
 export const getHotels = async (req, res, next) => {
-  // get all hotels
-  const newHotel = new Hotel(req.body);
   try {
-    const savedHotel = await newHotel.save();
-    res.status(200).json(savedHotel);
+    const hotels = await Hotel.find();
+    res.status(200).json(hotels);
   } catch (err) {
     next(err);
   }
