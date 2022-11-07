@@ -46,7 +46,7 @@ export const login = async (req, res, next) => {
       })
       .status(200)
       .json({ ...otherDetails }); // hence preventing password and isAdmin properties to get sent
-  } catch (er) {
-    next(er);
+  } catch (err) {
+    next(err);
   }
 };
